@@ -28,7 +28,7 @@
         </Logger>
         <Logger name="lesson.task.dao.DatabasePostgres" level="info" additivity="false">
             <AppenderRef ref="Console"/>
-    </Logger>
+        </Logger>
         <Logger name="lesson.task.dao.SqlDmlPostgres" level="info" additivity="false">
             <AppenderRef ref="Database"/>
         </Logger>
