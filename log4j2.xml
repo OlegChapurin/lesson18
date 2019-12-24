@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="fatal">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-mm-dd hh:mm:ss} %p %c [%t] %m %ex%n"/>
+        </Console>
+        <JDBC name="Database" tableName="public.logs">
+            <DriverManager driverClassName="org.postgresql.Driver"
+                           connectionString="jdbc:postgresql://127.0.0.1:5432/log"
+                           userName="postgres" password="postgres"/>
+            <Column name="date" isEventTimestamp="true" isUnicode="false" />
+            <Column name="log_level" pattern="%p"  isUnicode="false" />
+            <Column name="message" pattern="%c [%t] %m" isUnicode="false" />
+            <Column name="exception" pattern="%ex" isUnicode="false" />
+        </JDBC>
+
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console" />
+        </Root>
+        <Logger name="jdbc_" level="info" additivity="false">
+            <AppenderRef ref="Database"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="lesson.task.connection.ConnectionManagerPostgres" level="info" additivity="false">
+            <AppenderRef ref="Database"/>
+        </Logger>
+        <Logger name="lesson.task.dao.DatabasePostgres" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+    </Logger>
+        <Logger name="lesson.task.dao.SqlDmlPostgres" level="info" additivity="false">
+            <AppenderRef ref="Database"/>
+        </Logger>
+        <Logger name="lesson.task.dao.TableInputPostgres" level="info" additivity="false">
+            <AppenderRef ref="Database"/>
+        </Logger>
+        <Logger name="lesson.task.dao.TablePostgres" level="info" additivity="false">
+            <AppenderRef ref="Database"/>
+        </Logger>
+        <Logger name="lesson.task.work.DataInput" level="info" additivity="false">
+            <AppenderRef ref="Database"/>
+        </Logger>
+        <Logger name="lesson.task.work.FactoryUsersPostgres" level="info" additivity="false">
+            <AppenderRef ref="Database"/>
+        </Logger>
+        <Logger name="lesson.task.work.NewDatabase" level="info" additivity="false">
+            <AppenderRef ref="Database"/>
+        </Logger>
+        <Logger name="lesson.task.work.NewTables" level="info" additivity="false">
+            <AppenderRef ref="Database"/>
+        </Logger>
+    </Loggers>
+</Configuration>
